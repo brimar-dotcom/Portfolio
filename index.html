@@ -1,0 +1,397 @@
+<title>Brissa Martinez Portfolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: sticky top bar, hero beside a field photo, then each project as a text column next to its figures, like pages of a test report. */
+:root {
+  --bg: #f3f4f5;
+  --surface: #ffffff;
+  --fg: #17181a;
+  --muted: #5a5f66;
+  --line: #d5d8dc;
+  --accent: #8a1538;
+  --accent-fg: #ffffff;
+  --accent-soft: #f1dde3;
+  --font-display: "Barlow Condensed", "Arial Narrow", Arial, sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #101113;
+    --surface: #1a1c1f;
+    --fg: #eceef0;
+    --muted: #a0a6ad;
+    --line: #2d3036;
+    --accent: #e5668a;
+    --accent-fg: #101113;
+    --accent-soft: #2e1b22;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #101113;
+  --surface: #1a1c1f;
+  --fg: #eceef0;
+  --muted: #a0a6ad;
+  --line: #2d3036;
+  --accent: #e5668a;
+  --accent-fg: #101113;
+  --accent-soft: #2e1b22;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  z-index: 10;
+  background: var(--bg);
+}
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.wrap { max-width: 1120px; margin: 0 auto; }
+
+/* top bar */
+.bar {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 5;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+  margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px)));
+  padding-inline: max(16px, env(safe-area-inset-left, 0px));
+}
+.bar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 12px; flex-wrap: wrap; }
+.brand { font-family: var(--font-display); font-weight: 700; font-size: 1.35rem; letter-spacing: .04em; text-transform: uppercase; color: var(--fg); text-decoration: none; }
+.bar nav { display: flex; gap: 6px 20px; flex-wrap: wrap; }
+.bar nav a { font-family: var(--font-mono); font-size: .78rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); text-decoration: none; padding: 4px 0; border-bottom: 2px solid transparent; }
+.bar nav a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* shared type */
+h1, h2, h3 { font-family: var(--font-display); font-weight: 700; line-height: 1.02; margin: 0; text-wrap: balance; }
+h2 { font-size: clamp(2.2rem, 5vw, 3.4rem); letter-spacing: .005em; }
+h3 { font-size: 1.35rem; letter-spacing: .04em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+p { margin: 0 0 1em; max-width: 66ch; }
+.label { font-family: var(--font-mono); font-size: .76rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+
+/* hero */
+.hero { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); gap: 48px; align-items: end; padding-block: 64px 72px; }
+.hero h1 { font-size: clamp(3.6rem, 11vw, 8rem); text-transform: uppercase; letter-spacing: .005em; line-height: .9; }
+.hero h1 span { color: var(--accent); display: block; }
+.hero .lede { font-size: 1.2rem; margin-top: 28px; max-width: 46ch; }
+.hero .affil { display: flex; flex-wrap: wrap; gap: 8px 12px; margin-top: 24px; }
+.chip { font-family: var(--font-mono); font-size: .76rem; letter-spacing: .05em; text-transform: uppercase; padding: 5px 10px; border: 1px solid var(--line); background: var(--surface); color: var(--fg); }
+.chip.hot { background: var(--accent); border-color: var(--accent); color: var(--accent-fg); }
+.hero figure { margin: 0; }
+.hero img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 40%; }
+
+/* sections */
+section { padding-block: 72px; border-top: 1px solid var(--line); scroll-margin-top: 64px; }
+.section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px 32px; flex-wrap: wrap; margin-bottom: 36px; }
+.split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: start; }
+.split + .split { margin-top: 56px; }
+.split.flip .figs { order: -1; }
+
+figure { margin: 0; }
+figure img { display: block; width: 100%; height: auto; background: var(--surface); }
+figcaption { font-family: var(--font-mono); font-size: .74rem; letter-spacing: .04em; color: var(--muted); padding-top: 8px; border-top: 1px solid var(--line); margin-top: 8px; }
+.figs { display: grid; gap: 20px; min-width: 0; }
+.figs.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.figs .span { grid-column: 1 / -1; }
+.crop-p img { aspect-ratio: 4 / 5; object-fit: cover; }
+.crop-l img { aspect-ratio: 3 / 2; object-fit: cover; }
+.crop-sq img { aspect-ratio: 1 / 1; object-fit: cover; }
+.plate { background: #ffffff; padding: 14px; border: 1px solid var(--line); }
+.plate img { background: #ffffff; max-height: 220px; width: auto; margin: 0 auto; }
+
+/* project fact strip */
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 0; border: 1px solid var(--line); background: var(--surface); margin-bottom: 44px; }
+.facts div { padding: 14px 18px; border-right: 1px solid var(--line); min-width: 0; }
+.facts div:last-child { border-right: 0; }
+.facts dt { font-family: var(--font-mono); font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.facts dd { margin: 4px 0 0; font-weight: 500; }
+.facts { margin-top: 0; }
+dl.facts { margin-block: 0 44px; }
+
+/* altitude steps */
+.ladder { list-style: none; padding: 0; margin: 28px 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1px solid var(--line); background: var(--surface); }
+.ladder li { padding: 14px 14px 12px; border-right: 1px solid var(--line); min-width: 0; }
+.ladder li:last-child { border-right: 0; }
+.ladder b { display: block; font-family: var(--font-display); font-size: 1.7rem; line-height: 1; }
+.ladder small { display: block; font-family: var(--font-mono); font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
+.ladder li.done b { color: var(--accent); }
+.ladder li.done small::before { content: "Done / "; color: var(--accent); }
+
+/* WERC */
+.werc-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 40px; align-items: start; }
+.spec { border: 1px solid var(--line); background: var(--surface); padding: 18px 20px 12px; }
+.spec ul { margin: 0; padding-left: 1.1em; }
+.spec li { margin-bottom: 8px; font-size: .95rem; }
+.aside { border-left: 3px solid var(--accent); padding-left: 18px; }
+.aside p { font-size: .95rem; }
+.links { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 8px; font-family: var(--font-mono); font-size: .82rem; }
+
+footer { border-top: 1px solid var(--line); padding-block: 36px 56px; color: var(--muted); font-size: .9rem; display: flex; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap; }
+footer p { margin: 0; }
+
+@media (max-width: 860px) {
+  .hero { grid-template-columns: minmax(0, 1fr); gap: 36px; padding-block: 40px 52px; }
+  .hero figure { max-width: 420px; }
+  .split, .werc-grid { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .split.flip .figs { order: 0; }
+  section { padding-block: 52px; }
+  .ladder { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ladder li:nth-child(2) { border-right: 0; }
+  .ladder li:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+  .facts div { border-right: 0; border-bottom: 1px solid var(--line); }
+  .facts div:last-child { border-bottom: 0; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+
+<div class="bar">
+  <div class="wrap">
+    <a class="brand" href="#top">B. Martinez</a>
+    <nav aria-label="Sections">
+      <a href="#about">About</a>
+      <a href="#hawc">HAWC</a>
+      <a href="#vibration">Vibration</a>
+      <a href="#werc">WERC</a>
+    </nav>
+  </div>
+</div>
+
+<main class="wrap" id="top">
+  <header class="hero">
+    <div>
+      <p class="label">Professional portfolio / 2026</p>
+      <h1>Brissa <span>Martinez</span></h1>
+      <p class="lede">Mechanical and aerospace engineering student building and testing hardware, from flight electronics to vibration rigs.</p>
+      <div class="affil">
+        <span class="chip hot">New Mexico State University</span>
+        <span class="chip">Mechanical &amp; Aerospace Engineering</span>
+        <span class="chip">Los Alamos National Laboratory research</span>
+        <span class="chip">HAWC project team lead</span>
+      </div>
+    </div>
+    <figure>
+      <img src="img/p-008.jpg" alt="Brissa in a safety vest on open desert, holding a white cone-shaped test vehicle">
+    </figure>
+  </header>
+
+  <section id="about">
+    <div class="section-head">
+      <h2>About me</h2>
+      <p class="label">Design / Electronics / Testing / Hands-on assembly</p>
+    </div>
+    <div class="split">
+      <div>
+        <p>I am a Mechanical and Aerospace engineering student at New Mexico State University. Throughout my time in school, I have worked on a variety of projects that gave me experience in design, electronics, testing, and hands-on assembly. Along the way I have shown effective team collaboration and leadership, and I am now team lead of an eight-person group on the High Altitude Weather Cone (HAWC) project.</p>
+        <p>I am particularly interested in research and development and would like to keep working in this area after graduation. I currently work under Los Alamos National Laboratory and have really enjoyed the experience so far. It has given me a better understanding of the work I want to pursue and made me interested in building a career in a national laboratory or a similar research-focused environment.</p>
+      </div>
+      <div class="figs">
+        <figure>
+          <img src="img/p-009.jpg" alt="The research team standing in the desert with a cone test vehicle and a camera tripod">
+          <figcaption>Field team at a drop test site</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="hawc">
+    <div class="section-head">
+      <h2>Project 1: High-altitude drop test vehicle</h2>
+      <p class="label">Environmental Testing of Structures group, NMSU</p>
+    </div>
+
+    <dl class="facts">
+      <div><dt>Sponsor</dt><dd>Los Alamos National Laboratory</dd></div>
+      <div><dt>Vehicle</dt><dd>Cone, PLA for validation, aluminum for flight</dd></div>
+      <div><dt>My roles</dt><dd>Team lead of 8; parachute deployment electronics</dd></div>
+      <div><dt>Methods</dt><dd>Simulation, lab vibration, flight tests</dd></div>
+    </dl>
+
+    <div class="split">
+      <div>
+        <h3>Overview</h3>
+        <p>Los Alamos National Laboratory gave this project to an Environmental Testing of Structures research group at New Mexico State University to study the environment a flight vehicle experiences during a high-altitude drop.</p>
+        <p>The eventual goal is to test an aluminum flight vehicle at approximately 100,000 ft. Smaller PLA vehicles validate the system first, before the higher-risk test. The project combines simulation, laboratory vibration testing, and flight testing to better understand the conditions the vehicle experiences and to collect data that can validate the system.</p>
+        <ol class="ladder" aria-label="Drop test altitudes">
+          <li class="done"><b>1,000 ft</b><small>Drop</small></li>
+          <li class="done"><b>2,000 ft</b><small>Drop</small></li>
+          <li><b>20,000 ft</b><small>In preparation</small></li>
+          <li><b>100,000 ft</b><small>Aluminum vehicle goal</small></li>
+        </ol>
+      </div>
+      <div class="figs">
+        <figure class="plate">
+          <img src="img/p-012.jpg" alt="HAWC, High Altitude Weather Cone, project logo with an eagle">
+        </figure>
+        <figure>
+          <img src="img/p-014.jpg" alt="Machined aluminum cone standing on a flat base plate">
+          <figcaption>Manufactured aluminum cone</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="split" style="margin-top:28px">
+      <figure class="plate" style="max-width:100%">
+        <img src="img/p-013.jpg" alt="Exploded view of the vehicle assembly with labeled parts" style="max-height:none;width:100%">
+        <figcaption>Finalized design assembly: nose tip, nose middle, nose end, electronics holder, parachute cord plate, instrument rod, cone shell, parachute support plate</figcaption>
+      </figure>
+      <div></div>
+    </div>
+
+    <div class="split flip">
+      <div>
+        <h3>My role</h3>
+        <p>I am now the team lead of an eight-person group on the High Altitude Weather Cone (HAWC) project. I started on the project as an electronics team member, responsible for wiring, assembling, and testing the electronics for the parachute deployment system.</p>
+        <p>I tested three GPS modules and compared their altitude readings, the time each needed to get a satellite fix, and how well each held a signal enclosed inside the flight vehicle. I programmed and tested the GPS in Arduino/C++ and helped select a module with reliable performance.</p>
+        <p>The system uses a barometer for primary altitude, with GPS as a backup. It also includes a Teensy, NiCd batteries, an accelerometer, and electronics that fire a burn wire to release the parachute. I completed about three iterations of the electronics and wiring and helped prepare the system for the 1,000- and 2,000-ft drops. The deployment mechanism was successfully demonstrated.</p>
+      </div>
+      <div class="figs two">
+        <figure class="crop-p">
+          <img src="img/p-018.jpg" alt="Breadboard electronics with a Teensy, wires and a GPS module on a taped bench">
+          <figcaption>Current electronics setup</figcaption>
+        </figure>
+        <figure class="crop-p">
+          <img src="img/p-019.jpg" alt="Earlier electronics on a soldered board with a 9V battery and flight battery pack">
+          <figcaption>Previous iteration</figcaption>
+        </figure>
+        <figure class="span">
+          <img src="img/drop-success.jpg" alt="Black and white cone lying on cracked desert ground with its orange and white parachute deployed beside it" style="aspect-ratio:4/5;object-fit:cover;object-position:center 45%">
+          <figcaption>Successful drop: parachute deployed and vehicle recovered</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="vibration">
+    <div class="section-head">
+      <h2>Project 2: Vibration testing</h2>
+      <p class="label">Nonlinear dynamics / Natural frequencies</p>
+    </div>
+
+    <dl class="facts">
+      <div><dt>Structures</dt><dd>Aluminum and 3D-printed PLA cones</dd></div>
+      <div><dt>Excitation</dt><dd>Impact hammer</dd></div>
+      <div><dt>Sensors</dt><dd>Accelerometers</dd></div>
+      <div><dt>Compared against</dt><dd>ANSYS simulation</dd></div>
+      <div><dt>Research focus</dt><dd>Coupling between assembled parts</dd></div>
+    </dl>
+
+    <div class="split">
+      <div>
+        <h3>Overview</h3>
+        <p>As part of my work with a research group at New Mexico State University, under Los Alamos National Laboratory, I have been involved in experimental testing to study nonlinear dynamics and find the natural frequencies of different structures.</p>
+        <p>The work is part of a larger effort to understand how structures respond to different types of excitation and to compare physical testing with simulation. I have mainly worked with cone-shaped structures made from materials such as aluminum, plus some 3D-printed PLA structures. The experimental results are compared with ANSYS simulations to evaluate how closely the physical behavior matches the predicted behavior.</p>
+        <p>We also research coupling: how the modes change when a system like the cone is assembled piece by piece, instead of tested as one finished part.</p>
+      </div>
+      <div class="figs">
+        <figure>
+          <img src="img/p-022.jpg" alt="Testing software measure screen showing time signals and frequency response plots">
+          <figcaption>Measuring screen during tests</figcaption>
+        </figure>
+        <figure>
+          <img src="img/p-023.jpg" alt="Two overlaid frequency response function curves with sharp resonance peaks">
+          <figcaption>Comparing FRFs of two runs</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="split flip">
+      <div>
+        <h3>My role</h3>
+        <p>My role has focused on setting up and running the vibration tests and analyzing the resulting data. For the cone tests, I use accelerometers to measure the structural response while exciting the cone with a hammer. The testing software provides a frequency response function (FRF), which lets us identify the natural frequencies of the structure.</p>
+        <p>I have also worked on developing a free-free test setup, where the structure has to be supported without adding a fixed constraint that could change its natural response.</p>
+        <p>A significant part of this work has been troubleshooting. Wiring issues affected the collected data, and I had to find and correct them before getting reliable results. Testing is also slow, because the hammer must be used carefully to avoid unintended double impacts that interfere with the measurements.</p>
+      </div>
+      <div class="figs two">
+        <figure class="span crop-l">
+          <img src="img/p-026.jpg" alt="Aluminum cone suspended on cords inside a metal frame for free-free testing">
+          <figcaption>Current free-free setup</figcaption>
+        </figure>
+        <figure class="span crop-l">
+          <img src="img/p-027.jpg" alt="Impact hammer held in front of the aluminum cone under test">
+          <figcaption>Impact hammer in front of the cone under test</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="werc">
+    <div class="section-head">
+      <h2>WERC Environmental Design Contest 2027</h2>
+      <p class="label">Test and validation engineer / NMSU capstone</p>
+    </div>
+
+    <dl class="facts">
+      <div><dt>My role</dt><dd>Test and validation engineer</dd></div>
+      <div><dt>Task 4</dt><dd>NASA Artemis: capacitive wireless charging of a lunar vehicle</dd></div>
+      <div><dt>Task sponsor</dt><dd>New Mexico Space Grant Consortium</dd></div>
+      <div><dt>Contest</dt><dd>April 4 to 7, 2027, Las Cruces</dd></div>
+    </dl>
+
+    <div class="werc-grid">
+      <div>
+        <h3>The contest</h3>
+        <p>WERC is a consortium at New Mexico State University that runs an annual Environmental Design Contest for undergraduate engineering teams. Each team picks a real environmental challenge, then designs and builds a working model of its solution. Industry, government and academia take part, and every field of engineering can compete.</p>
+        <h3 style="margin-top:28px">Our task</h3>
+        <p>For this capstone project, our team is working on Task 4, developed with the NASA Artemis Surface Systems Team. The challenge is a wireless charging system for a lunar terrain vehicle at the lunar south pole. Power has to cross a physical gap capacitively, with no electrical contact, and the system has to cope with extreme cold, abrasive charged lunar dust, rugged terrain and long dark periods.</p>
+        <p>As test and validation engineer, my part is the testing side: checking that the bench-scale prototype meets what the task asks for and that the results hold up against the full-scale design.</p>
+        <div class="aside">
+          <p>Requirements below come from the Task 4 Preview 2 document and may change as WERC releases updates.</p>
+        </div>
+        <div class="links">
+          <a href="https://werc.nmsu.edu/index.html" target="_blank" rel="noopener">werc.nmsu.edu</a>
+        </div>
+      </div>
+      <div class="figs">
+        <div class="spec">
+          <p class="label">Bench-scale prototype must</p>
+          <ul>
+            <li>Deliver at least 25 W of continuous DC power for 10 minutes</li>
+            <li>Reach at least 70% DC-to-DC efficiency</li>
+            <li>Keep a transmitter-to-receiver gap of at least 25 mm (1 in.)</li>
+            <li>Fit within 31 in. long, 11 in. wide and 11 in. high</li>
+          </ul>
+        </div>
+        <div class="spec">
+          <p class="label">Full-scale design targets</p>
+          <ul>
+            <li>At least 1 kW of DC power to the vehicle</li>
+            <li>At least 80% DC-to-DC efficiency, with 90% as a goal</li>
+            <li>100 mm nominal gap, working from 75 to 150 mm</li>
+            <li>Charging with up to 50 mm lateral and 10 degrees angular misalignment</li>
+          </ul>
+        </div>
+        <div class="spec">
+          <p class="label">Tests WERC will run at the contest</p>
+          <ul>
+            <li>Low-temperature charging performance in a cooler</li>
+            <li>Alignment tolerance: lateral offset, angular misalignment and gap distance</li>
+            <li>Autonomous vehicle alignment under low-angle lighting</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Brissa Martinez, Mechanical &amp; Aerospace Engineering, New Mexico State University</p>
+    <p>Portfolio, September 2026</p>
+  </footer>
+</main>
